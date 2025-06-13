@@ -26,5 +26,10 @@ public class ModDataGen {
                 event.includeClient(),
                 new ModBlockModelGen(event.getGenerator().getPackOutput(), AircraftMod.MODID, existingFileHelper)
         );
+        //  方块标签
+        event.getGenerator().addProvider(
+                event.includeServer(),
+                new ModBlockTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), AircraftMod.MODID, existingFileHelper)
+        );
     }
 }

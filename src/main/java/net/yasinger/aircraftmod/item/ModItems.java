@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, AircraftMod.MODID);
     public static final Supplier<Item> PRIMOGEM = ITEMS.register("primogem", () -> new Primogem(new Item.Properties()));
+    public static final Supplier<Item> MAGIC_INGOT = ITEMS.register("magic_ingot", () -> new Item(new Item.Properties()));
     public static void registerBlockItem(String name, Supplier<Block> block) {
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }

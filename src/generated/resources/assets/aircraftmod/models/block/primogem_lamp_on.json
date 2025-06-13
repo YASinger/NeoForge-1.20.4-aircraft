@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "aircraftmod:block/primogem_lamp_on"
+  }
+}

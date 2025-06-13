@@ -15,8 +15,10 @@ public class ModZhLangGen extends LanguageProvider {
     protected void addTranslations() {
         //  物品
         add(ModItems.PRIMOGEM.get(), "原石");
+        add(ModItems.MAGIC_INGOT.get(), "魔法锭");
         //  方块
         add(ModBlocks.PRIMOGEM_BLOCK.get(), "原石块");
+        add(ModBlocks.PRIMOGEM_LAMP_BLOCK.get(), "原石灯");
         //  物品栏
         add("creativetab.aircraft_tab", "航空器模组");
     }

@@ -1,5 +1,7 @@
 {
   "block.aircraftmod.primogem_block": "原石块",
+  "block.aircraftmod.primogem_lamp_block": "原石灯",
   "creativetab.aircraft_tab": "航空器模组",
+  "item.aircraftmod.magic_ingot": "魔法锭",
   "item.aircraftmod.primogem": "原石"
 }
