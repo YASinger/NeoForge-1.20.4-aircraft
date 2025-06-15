@@ -16,6 +16,7 @@ public class ModZhLangGen extends LanguageProvider {
         //  物品
         add(ModItems.PRIMOGEM.get(), "原石");
         add(ModItems.MAGIC_INGOT.get(), "魔法锭");
+        add(ModItems.PRIMOGEM_APPLE.get(), "原石苹果");
         //  方块
         add(ModBlocks.PRIMOGEM_BLOCK.get(), "原石块");
         add(ModBlocks.PRIMOGEM_LAMP_BLOCK.get(), "原石灯");

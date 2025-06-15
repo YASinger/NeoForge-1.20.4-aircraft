@@ -21,6 +21,7 @@ public class ModItemModelGen extends ItemModelProvider {
     protected void registerModels() {
         this.basicItem(ModItems.PRIMOGEM.get());
         this.magicIngotModel(getResourceLocation(ModItems.MAGIC_INGOT.get()));
+        this.basicItem(ModItems.PRIMOGEM_APPLE.get());
     }
     public ResourceLocation getResourceLocation(Item item) {
         return Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item));
