@@ -1,5 +1,9 @@
 ## Change Log
 
+### [0.00.03] 2025-06-16
+验证食物，新增自定义模型方块
+- 建模json文件中textures里属性应改为 MODID:block/uv贴图名，如aircraftmod:block/primogem_frame
+
 ### [0.00.02] 2025-06-15
 新增食物（未验证），飞机实体框架
 

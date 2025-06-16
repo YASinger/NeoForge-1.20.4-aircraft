@@ -1,8 +1,10 @@
-// 1.20.4	2025-06-13T12:07:49.0795145	Block States: aircraftmod
+// 1.20.4	2025-06-16T17:25:53.9176426	Block States: aircraftmod
 26bff3d85d1aea9dcd3ff7632300a6eacb51e502 assets/aircraftmod/blockstates/primogem_block.json
+95ff77d61cb051e72f835268c5e44a180d86931a assets/aircraftmod/blockstates/primogem_frame.json
 60ebad4fd0e6331348fa90e9c65319054fe22612 assets/aircraftmod/blockstates/primogem_lamp_block.json
 327c6a61bedfeb0fe79c625b9e4ece0e52f20a17 assets/aircraftmod/models/block/primogem_block.json
 9091efa6863cb09b3b2d28f24a8d3d584cd1a498 assets/aircraftmod/models/block/primogem_lamp_off.json
 4bbb49fe8c62be8e88a5fb544229272363201cfc assets/aircraftmod/models/block/primogem_lamp_on.json
 3a4b208cddc0560e3edd138aabed524ac66e2a34 assets/aircraftmod/models/item/primogem_block.json
+f621b3a0df6f84e503bc4781544e4f3a61a20051 assets/aircraftmod/models/item/primogem_frame.json
 978be60103143c1d7acc620846038aba8f30facf assets/aircraftmod/models/item/primogem_lamp_block.json

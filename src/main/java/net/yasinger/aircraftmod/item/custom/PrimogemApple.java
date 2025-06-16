@@ -9,7 +9,7 @@ public class PrimogemApple extends Item {
     private static final FoodProperties FOOD_PROPERTIES = new FoodProperties.Builder()
             .nutrition(20)
             .saturationMod(10)
-            .effect(() -> new MobEffectInstance(MobEffects.POISON, 600, 1), 1)
+            .effect(() -> new MobEffectInstance(MobEffects.POISON, 600, 0), 1)
             .build();
     public PrimogemApple() {
         super(new Properties()
