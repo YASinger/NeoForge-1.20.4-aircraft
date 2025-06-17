@@ -1,5 +1,9 @@
 ## Change Log
 
+### [0.00.04] 2025-06-16
+新增半透明方块，新增合成表，修复框架漏水问题
+- 含水方块必须完整才能阻止水流
+
 ### [0.00.03] 2025-06-16
 验证食物，新增自定义模型方块
 - 建模json文件中textures里属性应改为 MODID:block/uv贴图名，如aircraftmod:block/primogem_frame

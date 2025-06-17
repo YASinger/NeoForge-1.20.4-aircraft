@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "aircraftmod:primogem"
+    },
+    {
+      "item": "aircraftmod:primogem"
+    },
+    {
+      "item": "aircraftmod:primogem"
+    },
+    {
+      "item": "aircraftmod:primogem"
+    },
+    {
+      "item": "aircraftmod:primogem"
+    },
+    {
+      "item": "aircraftmod:primogem"
+    },
+    {
+      "item": "aircraftmod:primogem"
+    },
+    {
+      "item": "aircraftmod:primogem"
+    },
+    {
+      "item": "aircraftmod:primogem"
+    }
+  ],
+  "result": {
+    "item": "aircraftmod:primogem_block"
+  }
+}

@@ -20,6 +20,7 @@ public class ModBlockModelGen extends BlockStateProvider {
         this.simpleBlockWithItem(ModBlocks.PRIMOGEM_BLOCK.get(), cubeAll(ModBlocks.PRIMOGEM_BLOCK.get()));
         this.lampBlock(ModBlocks.PRIMOGEM_LAMP_BLOCK.get());
         this.addWithHaveModel(ModBlocks.PRIMOGEM_FRAME.get(), "primogem_frame");
+        this.addWithHaveModel(ModBlocks.GLASS_JAR.get(), "glass_jar");
     }
     public void lampBlock(Block block) {
         var blockOff = models().cubeAll("primogem_lamp_off", new ResourceLocation(AircraftMod.MODID, "block/primogem_lamp_off"));

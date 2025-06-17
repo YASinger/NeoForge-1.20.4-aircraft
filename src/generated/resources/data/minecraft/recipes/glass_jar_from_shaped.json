@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "aircraftmod:magic_ingot"
+    }
+  },
+  "pattern": [
+    " a ",
+    "a a",
+    "aaa"
+  ],
+  "result": {
+    "item": "aircraftmod:glass_jar"
+  }
+}

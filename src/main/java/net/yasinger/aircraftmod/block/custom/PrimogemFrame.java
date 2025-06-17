@@ -29,8 +29,8 @@ public class PrimogemFrame extends Block implements SimpleWaterloggedBlock {
     }
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        //return VoxelShape.box(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-        return SHAPE;
+        //return SHAPE;
+        return Block.box(0,0,0,16,16,16);
     }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

@@ -1,5 +1,6 @@
 package net.yasinger.aircraftmod.datagen;
 
+import net.minecraft.data.DataProvider;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -30,6 +31,11 @@ public class ModDataGen {
         event.getGenerator().addProvider(
                 event.includeServer(),
                 new ModBlockTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), AircraftMod.MODID, existingFileHelper)
+        );
+        //  合成表
+        event.getGenerator().addProvider(
+                event.includeServer(),
+                (DataProvider.Factory<ModRecipeProvider>) ModRecipeProvider::new
         );
     }
 }

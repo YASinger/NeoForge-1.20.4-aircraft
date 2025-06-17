@@ -2,7 +2,6 @@ package net.yasinger.aircraftmod.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
-import net.yasinger.aircraftmod.AircraftMod;
 import net.yasinger.aircraftmod.block.ModBlocks;
 import net.yasinger.aircraftmod.item.ModItems;
 
@@ -21,6 +20,7 @@ public class ModZhLangGen extends LanguageProvider {
         add(ModBlocks.PRIMOGEM_BLOCK.get(), "原石块");
         add(ModBlocks.PRIMOGEM_LAMP_BLOCK.get(), "原石灯");
         add(ModBlocks.PRIMOGEM_FRAME.get(), "原石框架");
+        add(ModBlocks.GLASS_JAR.get(), "玻璃罐");
         //  物品栏
         add("creativetab.aircraft_tab", "航空器模组");
     }

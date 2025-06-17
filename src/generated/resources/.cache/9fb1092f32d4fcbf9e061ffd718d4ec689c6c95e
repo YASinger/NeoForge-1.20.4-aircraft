@@ -1,0 +1,9 @@
+// 1.20.4	2025-06-17T16:18:06.0185142	Recipes
+66aff6030c8e6f0581fb9014122a88116b3444b6 data/aircraftmod/advancements/recipes/misc/primogem_block.json
+1a14f36ebf45ecbb4feca8ddd8fb02250037068f data/aircraftmod/recipes/primogem_block.json
+d66c077bf74720d0cb82ee976b9581f0093d2641 data/minecraft/advancements/recipes/misc/glass_jar_from_shaped.json
+c1a3774df110a63ecc189759f11b1a7d1420d025 data/minecraft/advancements/recipes/misc/glass_jar_from_smelting.json
+f305a1b4fa5c962214e29fd3f1acbb0fbcc0ef18 data/minecraft/advancements/recipes/misc/primogem_frame_from_stonecutting.json
+9bdd2ac033662b70f510c07cbb2f20941167332e data/minecraft/recipes/glass_jar_from_shaped.json
+f56392b5831da5aebdc32fad44bfc9a77052b53a data/minecraft/recipes/glass_jar_from_smelting.json
+f63c85d2e0af1db1f8e922ae8e311e6f72c706b8 data/minecraft/recipes/primogem_frame_from_stonecutting.json
