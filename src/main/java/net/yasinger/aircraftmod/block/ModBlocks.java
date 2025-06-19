@@ -6,10 +6,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.yasinger.aircraftmod.AircraftMod;
-import net.yasinger.aircraftmod.block.custom.GlassJar;
-import net.yasinger.aircraftmod.block.custom.PrimogemFrame;
-import net.yasinger.aircraftmod.block.custom.PrimogemLampBlock;
-import net.yasinger.aircraftmod.block.custom.PrimogemBlock;
+import net.yasinger.aircraftmod.block.custom.*;
 import net.yasinger.aircraftmod.item.ModItems;
 
 import java.util.function.Supplier;
@@ -21,6 +18,7 @@ public class ModBlocks {
             PrimogemLampBlock::new);
     public static final Supplier<Block> PRIMOGEM_FRAME = registerBlock("primogem_frame", PrimogemFrame::new);
     public static final Supplier<Block> GLASS_JAR = registerBlock("glass_jar", GlassJar::new);
+    public static final Supplier<Block> PRIMOGEM_COUNTER_BLOCK = registerBlock("primogem_counter_block", PrimogemCounterBlock::new);
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
     }

@@ -18,6 +18,7 @@ public class ModBlockModelGen extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         this.simpleBlockWithItem(ModBlocks.PRIMOGEM_BLOCK.get(), cubeAll(ModBlocks.PRIMOGEM_BLOCK.get()));
+        this.simpleBlockWithItem(ModBlocks.PRIMOGEM_COUNTER_BLOCK.get(), cubeAll(ModBlocks.PRIMOGEM_COUNTER_BLOCK.get()));
         this.lampBlock(ModBlocks.PRIMOGEM_LAMP_BLOCK.get());
         this.addWithHaveModel(ModBlocks.PRIMOGEM_FRAME.get(), "primogem_frame");
         this.addWithHaveModel(ModBlocks.GLASS_JAR.get(), "glass_jar");

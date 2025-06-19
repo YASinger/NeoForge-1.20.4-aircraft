@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import static net.minecraft.world.level.block.WeepingVinesPlantBlock.SHAPE;
 
 public class GlassJar extends Block {
     public GlassJar() {

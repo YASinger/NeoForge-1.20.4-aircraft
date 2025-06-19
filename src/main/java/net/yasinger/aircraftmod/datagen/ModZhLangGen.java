@@ -21,6 +21,7 @@ public class ModZhLangGen extends LanguageProvider {
         add(ModBlocks.PRIMOGEM_LAMP_BLOCK.get(), "原石灯");
         add(ModBlocks.PRIMOGEM_FRAME.get(), "原石框架");
         add(ModBlocks.GLASS_JAR.get(), "玻璃罐");
+        add(ModBlocks.PRIMOGEM_COUNTER_BLOCK.get(), "原石计数器");
         //  物品栏
         add("creativetab.aircraft_tab", "航空器模组");
     }
