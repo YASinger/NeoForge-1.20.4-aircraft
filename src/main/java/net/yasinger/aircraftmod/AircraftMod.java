@@ -9,6 +9,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.yasinger.aircraftmod.block.ModBlocks;
 import net.yasinger.aircraftmod.block.ModBlockEntities;
+import net.yasinger.aircraftmod.entity.ModEntityTypes;
 import net.yasinger.aircraftmod.item.ModCreativeTab;
 import net.yasinger.aircraftmod.item.ModItems;
 import org.slf4j.Logger;
@@ -25,6 +26,7 @@ public class AircraftMod
         ModBlocks.register(modEventBus);
         ModCreativeTab.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
         NeoForge.EVENT_BUS.register(this);
     }
 

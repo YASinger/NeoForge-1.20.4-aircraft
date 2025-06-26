@@ -11,10 +11,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.yasinger.aircraftmod.AircraftMod;
 
-public class FlySwordModel extends EntityModel {
+public class FlyingSwordModel extends EntityModel {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AircraftMod.MODID, "fly_sword_entity"), "main");
     private final ModelPart body;
-    public FlySwordModel(ModelPart pRoot) {
+    public FlyingSwordModel(ModelPart pRoot) {
         this.body = pRoot.getChild("body");
     }
     public static LayerDefinition createBodyLayer() {
