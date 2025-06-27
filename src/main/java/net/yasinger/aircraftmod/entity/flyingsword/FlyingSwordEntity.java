@@ -17,10 +17,12 @@ import org.slf4j.Logger;
 
 public class FlyingSwordEntity extends Entity {
     private static final EntityDataAccessor<Vector3f> POSITION = SynchedEntityData.defineId(FlyingSwordEntity.class, EntityDataSerializers.VECTOR3);
+    private static final EntityDataAccessor<Vector3f> ANGLE = SynchedEntityData.defineId(FlyingSwordEntity.class, EntityDataSerializers.VECTOR3);
     private UUID ownerUUID;
-    private static final double FOLLOW_DISTANCE = 1.0;
-    private Vector3f lastTargetPos = new Vector3f(0, 0, 0);
-    private Vector3f currentTargetPos = new Vector3f(0, 0, 0);
+    private static final double FOLLOW_DISTANCE = 2.0;
+    private final Vector3f lastTargetPos = new Vector3f (0, 0, 0);
+    private final Vector3f currentTargetPos = new Vector3f(0, 0, 0);
+    private final Vector3f angle = new Vector3f(0, 0, 0);
     public FlyingSwordEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -28,13 +30,15 @@ public class FlyingSwordEntity extends Entity {
         super(pEntityType, pLevel);
         if (player != null) {
             this.ownerUUID = player.getUUID();
-            currentTargetPos = new Vector3f(
+            currentTargetPos.set(
                     (float) (player.getX() - player.getLookAngle().x * FOLLOW_DISTANCE),
                     (float) (player.getY() + 1.0f), // 让剑悬浮在玩家头顶
                     (float) (player.getZ() - player.getLookAngle().z * FOLLOW_DISTANCE)
             );
-            lastTargetPos = currentTargetPos;
             this.entityData.set(POSITION, currentTargetPos);
+            this.setPos(currentTargetPos.x(), currentTargetPos.y(), currentTargetPos.z());
+
+            angle.set(180f, player.getYRot(), 0); // 剑面朝向玩家背后
         }
     }
     @Override
@@ -42,20 +46,31 @@ public class FlyingSwordEntity extends Entity {
         if (!this.level().isClientSide && ownerUUID != null) {
             Player owner = this.level().getPlayerByUUID(ownerUUID);
             if (owner != null) {
-                Vector3f target = new Vector3f(
-                        (float) (owner.getX() - owner.getLookAngle().x * FOLLOW_DISTANCE),
+                // 只用玩家yaw计算水平分量，避免抬头/低头导致飞剑聚集在竖线上
+                double yawRad = Math.toRadians(owner.getYRot());
+                double offsetX =   Math.sin(yawRad) * FOLLOW_DISTANCE;
+                double offsetZ = - Math.cos(yawRad) * FOLLOW_DISTANCE;
+                currentTargetPos.set(
+                        (float) (owner.getX() + offsetX),
                         (float) (owner.getY() + 1.0f),
-                        (float) (owner.getZ() - owner.getLookAngle().z * FOLLOW_DISTANCE)
+                        (float) (owner.getZ() + offsetZ)
                 );
-                if (!target.equals(this.entityData.get(POSITION))) {
-                    this.entityData.set(POSITION, target);
+                if (!currentTargetPos.equals(this.entityData.get(POSITION))) {
+                    this.entityData.set(POSITION, currentTargetPos);
                 }
-                this.setPos(target.x(), target.y(), target.z());
+                this.setPos(currentTargetPos.x(), currentTargetPos.y(), currentTargetPos.z());
+
+                // 剑面朝向赋值为玩家朝向
+                angle.set(180f, owner.getYRot(), 0);
+                if (!angle.equals(this.entityData.get(ANGLE))) {
+                    this.entityData.set(ANGLE, angle);
+                }
             }
         }
-        if (this.level().isClientSide && !currentTargetPos.equals(this.entityData.get(POSITION))) {
+        if (this.level().isClientSide) {
             lastTargetPos.set(currentTargetPos);
             currentTargetPos.set(this.entityData.get(POSITION));
+            angle.set(this.entityData.get(ANGLE));
         }
         super.tick();
     }
@@ -63,6 +78,7 @@ public class FlyingSwordEntity extends Entity {
     @Override
     protected void defineSynchedData() {
         this.entityData.define(POSITION, new Vector3f(0, 0, 0));
+        this.entityData.define(ANGLE, new Vector3f(0, 0, 0));
     }
 
     @Override
@@ -100,5 +116,9 @@ public class FlyingSwordEntity extends Entity {
     }
     public Vector3f getCurrentTargetPos() {
         return currentTargetPos;
+    }
+
+    public Vector3f getAngle() {
+        return angle;
     }
 }

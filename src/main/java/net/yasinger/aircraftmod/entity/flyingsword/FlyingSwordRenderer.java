@@ -34,15 +34,13 @@ public class FlyingSwordRenderer extends EntityRenderer {
             double y = net.minecraft.util.Mth.lerp(pPartialTicks, last.y, curr.y);
             double z = net.minecraft.util.Mth.lerp(pPartialTicks, last.z, curr.z);
             pPoseStack.translate(x - sword.getX(), y - sword.getY(), z - sword.getZ());
-            // 让剑柄朝右上，剑尖朝左下
-            // 先让剑面朝向玩家背后（假设实体yaw为玩家yaw）
-            pPoseStack.mulPose(Axis.YP.rotationDegrees(-pEntityYaw));
-            // 再绕Z轴旋转45度（右上），绕X轴旋转-30度（左下）
-//            pPoseStack.mulPose(Axis.ZP.rotationDegrees(45));
-//            pPoseStack.mulPose(Axis.XP.rotationDegrees(-30));
+            pPoseStack.translate(0,-1,0);
+            // 读取同步的角度，应用到模型
+            var angle = sword.getAngle();
+            pPoseStack.mulPose(Axis.YP.rotationDegrees(-angle.y)); // yaw
+            pPoseStack.mulPose(Axis.XP.rotationDegrees(90)); // roll
+            // pitch
         }
-        pPoseStack.mulPose(Axis.YN.rotationDegrees(45));
-        pPoseStack.translate(0,-1,0);
         VertexConsumer buffer = pBufferSource.getBuffer(this.flyingSwordModel.renderType(this.getTextureLocation(pEntity)));
         this.flyingSwordModel.renderToBuffer(pPoseStack, buffer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         pPoseStack.popPose();

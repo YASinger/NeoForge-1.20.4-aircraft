@@ -27,9 +27,9 @@ public class FlyingSwordModel extends EntityModel {
     }
     @Override
     public void setupAnim(Entity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        body.xRot = pLimbSwing;
-        body.yRot = pNetHeadYaw;
-        body.zRot = pHeadPitch;
+        body.xRot = (float)Math.PI / 2;
+        body.yRot = 0;
+        body.zRot = (float)Math.PI / 2;
     }
 
     @Override

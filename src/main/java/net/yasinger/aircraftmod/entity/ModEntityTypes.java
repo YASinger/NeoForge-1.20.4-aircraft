@@ -16,8 +16,6 @@ public class ModEntityTypes {
     public static final Supplier<EntityType<Entity>> FLYING_SWORD_ENTITY = ENTITY_TYPES.register("flying_sword_entity",
             () -> EntityType.Builder.of(FlyingSwordEntity::new, MobCategory.MISC)
                     .sized(2, 0.5F)
-//                    .clientTrackingRange(8)
-//                    .updateInterval(10)
                     .build(AircraftMod.MODID + ":flying_sword_entity"));
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
