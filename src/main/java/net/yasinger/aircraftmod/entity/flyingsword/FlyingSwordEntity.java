@@ -16,13 +16,8 @@ import org.slf4j.Logger;
 
 
 public class FlyingSwordEntity extends Entity {
-    private static final EntityDataAccessor<Vector3f> POSITION = SynchedEntityData.defineId(FlyingSwordEntity.class, EntityDataSerializers.VECTOR3);
-    private static final EntityDataAccessor<Vector3f> ANGLE = SynchedEntityData.defineId(FlyingSwordEntity.class, EntityDataSerializers.VECTOR3);
     private UUID ownerUUID;
     private static final double FOLLOW_DISTANCE = 2.0;
-    private final Vector3f lastTargetPos = new Vector3f (0, 0, 0);
-    private final Vector3f currentTargetPos = new Vector3f(0, 0, 0);
-    private final Vector3f angle = new Vector3f(0, 0, 0);
     public FlyingSwordEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -30,55 +25,38 @@ public class FlyingSwordEntity extends Entity {
         super(pEntityType, pLevel);
         if (player != null) {
             this.ownerUUID = player.getUUID();
-            currentTargetPos.set(
-                    (float) (player.getX() - player.getLookAngle().x * FOLLOW_DISTANCE),
-                    (float) (player.getY() + 1.0f), // 让剑悬浮在玩家头顶
-                    (float) (player.getZ() - player.getLookAngle().z * FOLLOW_DISTANCE)
-            );
-            this.entityData.set(POSITION, currentTargetPos);
-            this.setPos(currentTargetPos.x(), currentTargetPos.y(), currentTargetPos.z());
-
-            angle.set(180f, player.getYRot(), 0); // 剑面朝向玩家背后
         }
     }
+    private int lerpSteps;
+    private double lerpX;
+    private double lerpY;
+    private double lerpZ;
+    private double lerpYRot;
+    private double lerpXRot;
+
+
     @Override
     public void tick() {
-        if (!this.level().isClientSide && ownerUUID != null) {
-            Player owner = this.level().getPlayerByUUID(ownerUUID);
-            if (owner != null) {
-                // 只用玩家yaw计算水平分量，避免抬头/低头导致飞剑聚集在竖线上
-                double yawRad = Math.toRadians(owner.getYRot());
-                double offsetX =   Math.sin(yawRad) * FOLLOW_DISTANCE;
-                double offsetZ = - Math.cos(yawRad) * FOLLOW_DISTANCE;
-                currentTargetPos.set(
-                        (float) (owner.getX() + offsetX),
-                        (float) (owner.getY() + 1.0f),
-                        (float) (owner.getZ() + offsetZ)
-                );
-                if (!currentTargetPos.equals(this.entityData.get(POSITION))) {
-                    this.entityData.set(POSITION, currentTargetPos);
-                }
-                this.setPos(currentTargetPos.x(), currentTargetPos.y(), currentTargetPos.z());
-
-                // 剑面朝向赋值为玩家朝向
-                angle.set(180f, owner.getYRot(), 0);
-                if (!angle.equals(this.entityData.get(ANGLE))) {
-                    this.entityData.set(ANGLE, angle);
+        super.tick();
+        if (!this.level().isClientSide) {
+            if (this.ownerUUID != null) {
+                Player owner = this.level().getPlayerByUUID(this.ownerUUID);
+                if (owner != null) {
+                    // 设置飞剑悬浮在玩家脚下
+                    double x = owner.getX();
+                    double y = owner.getY() - 0.2F;
+                    double z = owner.getZ();
+                    this.setPos(x, y, z);
                 }
             }
+        } else {
+            tickLerp();
         }
-        if (this.level().isClientSide) {
-            lastTargetPos.set(currentTargetPos);
-            currentTargetPos.set(this.entityData.get(POSITION));
-            angle.set(this.entityData.get(ANGLE));
-        }
-        super.tick();
     }
 
     @Override
     protected void defineSynchedData() {
-        this.entityData.define(POSITION, new Vector3f(0, 0, 0));
-        this.entityData.define(ANGLE, new Vector3f(0, 0, 0));
+
     }
 
     @Override
@@ -111,14 +89,28 @@ public class FlyingSwordEntity extends Entity {
         return net.minecraft.world.entity.EntityDimensions.fixed(0.0F, 0.0F);
     }
 
-    public Vector3f getLastTargetPos() {
-        return lastTargetPos;
-    }
-    public Vector3f getCurrentTargetPos() {
-        return currentTargetPos;
+    @Override
+    public void lerpTo(double pX, double pY, double pZ, float pYRot, float pXRot, int pLerpSteps) {
+        // 更新当前同步点
+        this.lerpX = pX;
+        this.lerpY = pY;
+        this.lerpZ = pZ;
+        this.lerpYRot = pYRot;
+        this.lerpXRot = pXRot;
+        this.lerpSteps = pLerpSteps;
     }
 
-    public Vector3f getAngle() {
-        return angle;
+    public void tickLerp() {
+        if (this.lerpSteps > 0) {
+            double d0 = this.getX() + (this.lerpX - this.getX()) / (double) this.lerpSteps;
+            double d1 = this.getY() + (this.lerpY - this.getY()) / (double) this.lerpSteps;
+            double d2 = this.getZ() + (this.lerpZ - this.getZ()) / (double) this.lerpSteps;
+            double d3 = net.minecraft.util.Mth.wrapDegrees(this.lerpYRot - (double) this.getYRot());
+            this.setYRot(this.getYRot() + (float) d3 / (float) this.lerpSteps);
+            this.setXRot(this.getXRot() + (float) (this.lerpXRot - (double) this.getXRot()) / (float) this.lerpSteps);
+            --this.lerpSteps;
+            this.setPos(d0, d1, d2);
+            this.setRot(this.getYRot(), this.getXRot());
+        }
     }
 }
