@@ -12,6 +12,9 @@ public class FlyingSwordEntity extends Entity {
     private UUID ownerUUID;
     private static final double FOLLOW_DISTANCE = 0.5;
 
+    // 新增：tick计数器
+    private int invisibleTicks = 5;
+
     // 插值相关变量
     private int lerpSteps;
     private double lerpX, lerpY, lerpZ;
@@ -32,6 +35,12 @@ public class FlyingSwordEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
+        if (invisibleTicks > 0) {
+            this.setInvisible(true);
+            invisibleTicks--;
+        } else {
+            this.setInvisible(false);
+        }
         if (!this.level().isClientSide) {
             // 服务器端：跟随玩家并同步旋转
             if (this.ownerUUID != null) {
@@ -104,7 +113,7 @@ public class FlyingSwordEntity extends Entity {
         this.lastlerpY = pY;
         this.lastlerpZ = pZ;
         this.lerpYRot = pYRot;
-        this.lerpSteps = 3;
+        this.lerpSteps = pLerpSteps;
     }
 
     public void tickLerp() {
